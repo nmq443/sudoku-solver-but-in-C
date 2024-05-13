@@ -1,30 +1,34 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "solver.h"
 #include "print.h"
+#include "board_generator.h"
 
 int main(int argc, char **argv)
 {
     printf("Sudoku solver written in C!\n");
+    
+    printf("\nInitialize a new board!");
+    int **board = NULL;
+    board = init_board();
 
-    int board[BOARD_SIZE][BOARD_SIZE] =
+    if (!board)
     {
-        {3, 0, 6, 5, 0, 8, 4, 0, 0},
-        {5, 2, 0, 0, 0, 0, 0, 0, 0},
-        {0, 8, 7, 0, 0, 0, 0, 3, 1},
-        {0, 0, 3, 0, 1, 0, 0, 8, 0},
-        {9, 0, 0, 8, 6, 3, 0, 0, 5},
-        {0, 5, 0, 0, 9, 0, 6, 0, 0},
-        {1, 3, 0, 0, 0, 0, 2, 5, 0},
-        {0, 0, 0, 0, 0, 0, 0, 7, 4},
-        {0, 0, 5, 2, 0, 6, 3, 0, 0}
-    };
+        printf("Can't initialize a board!\n");
+        return -1;
+    } 
 
-    printf("Before solving: \n");
-    print_board(board);
+    int ***p_board = NULL;
+    p_board = &board;
 
-    if (!solve(board, 0, 0))
+    if (!solve(p_board, 0, 0))
     {
         printf("\nBoard unsolvable!");
+    } else 
+    {
+        print_board(board);
     }
+
+    free(board);
     return 0;
 }

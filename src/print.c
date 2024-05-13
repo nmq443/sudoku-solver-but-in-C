@@ -1,6 +1,7 @@
 #include "print.h"
 
-void print_board(int board[][BOARD_SIZE])
+//void print_board(int board[][BOARD_SIZE])
+void print_board(int **board)
 {
     for (int col = 0; col < BOARD_SIZE; ++col)
     {
